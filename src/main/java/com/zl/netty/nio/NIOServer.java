@@ -63,7 +63,7 @@ public class NIOServer {
 			}
 			ByteBuffer writeBuffer = ByteBuffer.wrap("hello client".getBytes());
 			socketChannel.write(writeBuffer);
-			key.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+//			key.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		} else if (key.isWritable()) {
 			SocketChannel socketChannel = (SocketChannel) key.channel();
 			key.interestOps(SelectionKey.OP_READ);

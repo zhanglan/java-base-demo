@@ -63,7 +63,7 @@ public class NIOClient {
         String msg = scanner.next();
         ByteBuffer writeBuffer = ByteBuffer.wrap(msg.getBytes());
         socketChannel.write(writeBuffer);
-        socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+//        socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
     }
 
     public static void main(String[] args) throws IOException {
