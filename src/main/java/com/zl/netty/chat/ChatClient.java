@@ -37,7 +37,7 @@ public class ChatClient {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast("decoder", new StringDecoder());
-                            pipeline.addLast("encode", new StringEncoder());
+                            pipeline.addLast("encoder", new StringEncoder());
                             pipeline.addLast(new ChatClientHandler());
                         }
                     });
