@@ -12,7 +12,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 /**
  * @author zhang_lan@inspur.com
  * @description
- * @date 2020/7/12 0012
+ * @date 2020/7/12
  */
 public class NettyServer {
 
