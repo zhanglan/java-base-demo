@@ -11,7 +11,9 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ReentrantLockSample implements Runnable {
 
-	private static final ReentrantLock lock = new ReentrantLock();
+//	private static final ReentrantLock lock = new ReentrantLock();
+
+	private static final MyLock lock = new MyLock();
 
 	@Override
 	public void run() {
