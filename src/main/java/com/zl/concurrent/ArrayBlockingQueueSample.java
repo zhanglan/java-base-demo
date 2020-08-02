@@ -33,60 +33,30 @@ public class ArrayBlockingQueueSample {
 
 	public static void main(String[] args) throws InterruptedException {
 		ArrayBlockingQueueSample sample = new ArrayBlockingQueueSample();
-//		ExecutorService service = Executors.newCachedThreadPool();
-//		service.submit(() -> {
-//			int i = 0;
-//			while (true) {
-//				Ball ball = new Ball(i, "球" + i);
-//				System.out.println("准备放入球-->" + ball.getName() + ",此时共有球：" + sample.size() + "个...");
-//				sample.produce(ball);
-//				TimeUnit.SECONDS.sleep(1);
-//				i++;
-//			}
-//
-//		});
-//
-//		service.submit(() -> {
-//			while (true) {
-//				System.out.println("准备拿出球,此时共有球：" + sample.size() + "个...");
-//				Ball ball = sample.consume();
-//			}
-//		});
-		Thread t1 = new Thread(() -> {
-			try {
-				sample.produce(new Ball(1, "球1"));
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		ExecutorService service = Executors.newCachedThreadPool();
+		service.submit(() -> {
+			int i = 0;
+			while (i <= 100) {
+				Ball ball = new Ball(i, "球" + i);
+				System.out.println("准备放入球-->" + ball.getName() + ",此时共有球：" + sample.size() + "个...");
+				try {
+					sample.produce(ball);
+					TimeUnit.MICROSECONDS.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				i++;
 			}
-		}, "t1");
-		Thread t2 = new Thread(() -> {
-			try {
-				sample.produce(new Ball(2, "球2"));
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}, "t2");
-		Thread t3 = new Thread(() -> {
-			try {
-				sample.produce(new Ball(3, "球4"));
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}, "t3");
 
-		Thread t4 = new Thread(() -> {
-			try {
-				sample.consume();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		});
+
+		service.submit(() -> {
+			while (true) {
+				System.out.println("准备拿出球,此时共有球：" + sample.size() + "个...");
+				Ball ball = sample.consume();
 			}
-		}, "t4");
-		t1.start();
-//		TimeUnit.SECONDS.sleep(10);
-		t2.start();
-//		t3.start();
-		TimeUnit.SECONDS.sleep(5);
-		t4.start();
+		});
+
 	}
 }
 
